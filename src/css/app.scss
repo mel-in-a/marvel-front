@@ -1,0 +1,57 @@
+// Specific rules for this project
+
+body {
+    background: rgb(27, 27, 27);
+    height: 100%;
+  }
+
+header {
+  height: 80px;
+  background: #000;
+  width: 100%;
+  color: red;
+  display: flex;
+}
+
+.logo {
+  width: 180px;
+  height: 50px;
+  background: url("../logoMarvel.png") center center no-repeat;
+  background-size: contain;
+}
+
+.main-menu {
+  max-width: 400px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 20px;
+  max-width: 1200px;
+}
+
+.card {
+  /* width: 100%; */
+  height: 250px;
+  object-fit: cover;
+}
+
+
+// FOOTER
+.footer {
+    // position: absolute;
+    // bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 63px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(97, 97, 97);
+    font-size: 12px;
+  }
+
+  .footer a {
+    color:aliceblue
+  }
