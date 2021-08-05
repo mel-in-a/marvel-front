@@ -18,8 +18,8 @@ function App() {
           <Route exact path="/" >
           <Home />
           </Route>
-          <Route exact path="/character/:id" >
-          <Character />
+          <Route path="/character/:id" >
+          <Character  />
           </Route>
         </Switch>
       </Router>

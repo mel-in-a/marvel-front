@@ -3,6 +3,7 @@
 body {
     background: rgb(27, 27, 27);
     height: 100%;
+    color:rgb(97, 97, 97)
   }
 
 header {
@@ -69,10 +70,15 @@ justify-content: center;
   padding: 10px;
   border-radius: 5px;
   min-width:20px;
-  // cursor: not-allowed;
+  cursor: pointer;
   text-align: center;
 
 }
+.pagination .isactive {
+  color: red !important;
+}
+
+
 
 
 // FOOTER

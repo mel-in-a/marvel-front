@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -10,14 +11,19 @@ const Home = () => {
   const numberOfPages = parseInt(count / limit);
 
   const paginateLoop = (numberOfPages) => {
-    let loop = "";
-    console.log("number of page dans la boucle" + numberOfPages);
+    let loop = [];
+
     for (let i = 1; i <= numberOfPages; i++) {
-      loop += `<div className="page">${i}</div>`;
+      loop.push( i );
     }
-    console.log(loop);
+
     return loop;
   };
+
+  // const activeClass = () => {
+  //   return this.className="active";
+  // };
+
 
   // count / limit = number of pages !
 
@@ -58,7 +64,13 @@ const Home = () => {
 
         {/* creation d'un composant pour looper? */}
         {/* <div className="page">{numberOfPages}</div> */}
-        {paginateLoop(numberOfPages)}
+        {paginateLoop(numberOfPages).map((page, index) => {
+          return (
+            <div key={index} className="page" onClick={() =>setSkip(page*100)}>
+              {page}
+            </div>
+          );
+        })}
 
         <div
           className="right-arrow"
@@ -69,15 +81,18 @@ const Home = () => {
           &#x1F81A;
         </div>
       </div>
+      {/* end top pagination bloc */}
       <div className="gallery m-auto p-5">
         {data.map((character, index) => {
           return (
-            <div key={index} className="card bg-black br10">
+            <>
+            <Link to={"/character/" + character._id}>
+            <div key={index} className="card bg-black br10 hvr-underline-reveal bold">
               <img
                 src={
                   character.thumbnail.path + "." + character.thumbnail.extension
                 }
-                alt=""
+                alt="" className=""
               />
               <div className="flex flex-col flex-center gray p-2 fs-small center">
                 <div className="red"> {character.name}</div>
@@ -86,6 +101,8 @@ const Home = () => {
                 </div>
               </div>
             </div>
+            </Link>
+</>
           );
         })}
       </div>
@@ -101,7 +118,14 @@ const Home = () => {
 
         {/* creation d'un composant pour looper? */}
         {/* <div className="page">{numberOfPages}</div> */}
-        {paginateLoop(numberOfPages)}
+       {/* TODO // avoid click when no mores pages */}
+        {paginateLoop(numberOfPages).map((page, index) => {
+          return (
+            <div key={index} className="page" onClick={() =>setSkip(page*100)}>
+              {page}
+            </div>
+          );
+        })}
 
         <div
           className="right-arrow"
