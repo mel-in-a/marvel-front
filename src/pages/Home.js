@@ -81,6 +81,8 @@ const Home = () => {
           &#x1F81A;
         </div>
       </div>
+
+      <div className="container">Moteur de recherche ici</div>
       {/* end top pagination bloc */}
       <div className="gallery m-auto p-5">
         {data.map((character, index) => {
