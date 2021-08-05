@@ -12,8 +12,8 @@ const Home = () => {
   const paginateLoop = (numberOfPages) => {
     let loop = "";
     console.log("number of page dans la boucle" + numberOfPages);
-    for (let i = 0; i < numberOfPages; i++) {
-      loop += i;
+    for (let i = 1; i <= numberOfPages; i++) {
+      loop += `<div className="page">${i}</div>`;
     }
     console.log(loop);
     return loop;
@@ -58,7 +58,7 @@ const Home = () => {
 
         {/* creation d'un composant pour looper? */}
         {/* <div className="page">{numberOfPages}</div> */}
-        {paginateLoop()}
+        {paginateLoop(numberOfPages)}
 
         <div
           className="right-arrow"
@@ -101,7 +101,7 @@ const Home = () => {
 
         {/* creation d'un composant pour looper? */}
         {/* <div className="page">{numberOfPages}</div> */}
-        {paginateLoop()}
+        {paginateLoop(numberOfPages)}
 
         <div
           className="right-arrow"
