@@ -7,10 +7,19 @@ const Home = () => {
   const [skip, setSkip] = useState(0);
   const [count, setCount] = useState(0);
   const [limit, setLimit] = useState(100);
+  const numberOfPages = parseInt(count / limit);
 
-  const numberOfPage = parseInt(count/limit);
+  const paginateLoop = (numberOfPages) => {
+    let loop = "";
+    console.log("number of page dans la boucle" + numberOfPages);
+    for (let i = 0; i < numberOfPages; i++) {
+      loop += i;
+    }
+    console.log(loop);
+    return loop;
+  };
 
-// count / limit = number of pages !
+  // count / limit = number of pages !
 
   useEffect(() => {
     const getData = async () => {
@@ -22,7 +31,7 @@ const Home = () => {
         setCount(req.data.count);
         setLimit(req.data.limit);
         setisLoading(false);
-  
+
         // console.log("json data: " + req.data.results[1].name);
       } catch (error) {
         console.log(error);
@@ -35,37 +44,75 @@ const Home = () => {
     <div className="loading-image">
       <img src="../loader-infinity.gif" alt="" />
     </div>
-  ) : ( 
+  ) : (
     <>
-    <div className="gallery m-auto p-5">
-      {data.map((character, index) => {
-        return (
-          <div key={index} className="card bg-black br10">
-            <img
-              src={
-                character.thumbnail.path + "." + character.thumbnail.extension
-              }
-              alt=""
-            />
-            <div className="flex flex-col flex-center gray p-2 fs-small center">
-             <div className="red"> {character.name}</div> 
-             <div className=" mx-2">{character.description.slice(0,20)} ...</div> 
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  <div className="pagination flex flex-center mx-auto">
-  
-    <div className="left-arrow" onClick={() => {setSkip(skip - limit)}}>&#x1F818;</div>
-     {/* map with page number */}
-      {/* creation d'uncomposant pour looper!  */}
-    <div className="page">1</div>
+      <div className="pagination flex flex-center mx-auto">
+        <div
+          className="left-arrow"
+          onClick={() => {
+            setSkip(skip - limit);
+          }}
+        >
+          &#x1F818;
+        </div>
 
-    <div className="right-arrow" onClick={() => {setSkip(skip + limit)}}>&#x1F81A;</div>
- 
-  </div>
-</>
+        {/* creation d'un composant pour looper? */}
+        {/* <div className="page">{numberOfPages}</div> */}
+        {paginateLoop()}
+
+        <div
+          className="right-arrow"
+          onClick={() => {
+            setSkip(skip + limit);
+          }}
+        >
+          &#x1F81A;
+        </div>
+      </div>
+      <div className="gallery m-auto p-5">
+        {data.map((character, index) => {
+          return (
+            <div key={index} className="card bg-black br10">
+              <img
+                src={
+                  character.thumbnail.path + "." + character.thumbnail.extension
+                }
+                alt=""
+              />
+              <div className="flex flex-col flex-center gray p-2 fs-small center">
+                <div className="red"> {character.name}</div>
+                <div className=" mx-2">
+                  {character.description.slice(0, 20)} ...
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="pagination flex flex-center mx-auto">
+        <div
+          className="left-arrow"
+          onClick={() => {
+            setSkip(skip - limit);
+          }}
+        >
+          &#x1F818;
+        </div>
+
+        {/* creation d'un composant pour looper? */}
+        {/* <div className="page">{numberOfPages}</div> */}
+        {paginateLoop()}
+
+        <div
+          className="right-arrow"
+          onClick={() => {
+            setSkip(skip + limit);
+          }}
+        >
+          &#x1F81A;
+        </div>
+      </div>
+    </>
   );
 };
 
