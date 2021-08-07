@@ -5,6 +5,7 @@ import "./css/app.css";
 import Loader from "./components/Loader";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Cookies from "js-cookie";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -13,8 +14,9 @@ import Character from "./pages/Comics";
 function App() {
   return (
     <div>
+          <Router>
       <Header />
-      <Router>
+
         <Switch>
           <Route exact path="/" >
           <Home />

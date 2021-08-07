@@ -2,7 +2,7 @@
 
 body {
     background: rgb(27, 27, 27);
-    min-height: 100%;
+    height: 100vh;
     color:rgb(219, 219, 219);
 
   }
@@ -15,9 +15,8 @@ header {
   display: flex;
 }
 
-hvr-underline-reveal:hover {
-  border-color: red !important;
-}
+
+
 
 .logo {
   width: 180px;
@@ -29,9 +28,22 @@ hvr-underline-reveal:hover {
   width: 64px;
 }
 
+/* MAIN MENU */
+
 .main-menu {
   max-width: 400px;
+
 }
+
+.main-menu a {
+  color: red;
+  text-decoration: none;
+}
+.main-menu a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
 
 .gallery {
   display: grid;
@@ -39,6 +51,25 @@ hvr-underline-reveal:hover {
   grid-gap: 20px;
   max-width: 1200px;
 }
+
+.card .favorite {
+  background-color: rgb(15, 15, 15);
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+
 
 .card {
   width: auto; 
@@ -51,7 +82,9 @@ hvr-underline-reveal:hover {
 .card:hover .card-inner {
   transform: rotateY(180deg);
 }
-
+.card-front {
+  background: none;
+}
 .card-front, .card-back {
   position: absolute;
   width: 100%;
@@ -61,7 +94,7 @@ hvr-underline-reveal:hover {
 }
 
 .card-back {
-  background-color: black;
+  /* background-color: black; */
   color: white;
   transform: rotateY(180deg);
 }
@@ -79,13 +112,15 @@ hvr-underline-reveal:hover {
 
 .card img {
   max-width: 100%; 
-  height:80%;
+  height:70%;
   object-fit: cover;
   background-position: center center;
   border-radius: 10px;
 
 
 }
+
+
 
 .pagination {
   margin: 0 auto;
@@ -145,6 +180,20 @@ justify-content: center;
   outline: none;
   border-radius: 5px;
 }
+
+/* BUTTONS */
+
+.btn {
+  background-color: rgb(255, 0, 0);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+
+}
+
+
 
 /* // FOOTER */
 

@@ -46,7 +46,7 @@ const Comics = () => {
           return (
             <div
               key={index}
-              className="card bg-black br10 hvr-underline-reveal bold"
+              className="card br10 bold"
             >
               <div className="card-inner">
               <div className="card-front">
@@ -61,7 +61,7 @@ const Comics = () => {
               <div className="card-back">
               <div className="flex flex-col flex-center gray p-2 fs-small center">
               
-                <div className="lh4 light mt-2">{comic.description ? comic.description : "Pas description pour le moment"}</div>
+                <div className="lh4 light mt-2 text-justify">{comic.description ? comic.description : "Pas description pour le moment"}</div>
               </div>
               </div>
             </div>

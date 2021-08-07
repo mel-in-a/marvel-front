@@ -34,7 +34,6 @@
   font-size: 0.8rem;
 }
 
-
 /* font weight */
 .bold {
   font-weight: bold;
@@ -43,7 +42,6 @@
 .light {
   font-weight: 300;
 }
-
 
 /* // font color */
 
@@ -68,16 +66,16 @@
 }
 
 /* // alignments  */
-.center {
+.text-center {
   text-align: center;
 }
-.right {
+.text-right {
   text-align: right;
 }
-.left {
+.text-left {
   text-align: left;
 }
-.justify {
+.text-justify {
   text-align: justify;
 }
 
@@ -106,7 +104,6 @@
   margin: 0 auto;
 }
 
-
 /* line height  */
 .lh1 {
   line-height: 1;
@@ -129,8 +126,6 @@
 .lh7 {
   line-height: 2.2;
 }
-
-
 
 /* Border */
 .border-box {
@@ -178,7 +173,9 @@
 .flex-end {
   justify-content: flex-end;
 }
-
+.flex-wrap {
+  flex-wrap: wrap;
+}
 .gap5 {
   gap: 10px;
 }

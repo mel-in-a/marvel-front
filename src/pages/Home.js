@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
+import Cookies from "js-cookie";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -14,6 +15,16 @@ const Home = () => {
 
   const numberOfPages = parseInt(count / limit);
 
+  const [favExists, setfavExists] = useState(false);
+
+  useEffect(() => {
+    if (Cookies.get("favsChar")) {
+      setfavExists(true);
+     
+    }
+   
+  }, [favExists]);
+
   const paginateLoop = (numberOfPages) => {
     let loop = [];
     for (let i = 1; i <= numberOfPages + 1; i++) {
@@ -22,11 +33,18 @@ const Home = () => {
     return loop;
   };
 
-  // const activeClass = () => {
-  //   return this.className="active";
-  // };
-
-  // count / limit = number of pages !
+  const addToFavourite = (id) => {
+    // i want to add an arrat to a cookie
+    const favsChar = Cookies.get("favsChar");
+    if (favsChar) {
+      const favsArray = JSON.parse(favsChar);
+      favsArray.push(id);
+      Cookies.set("favsChar", JSON.stringify(favsArray));
+    } else {
+      const favsArray = [id];
+      Cookies.set("favsChar", JSON.stringify(favsArray));
+    }
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -48,54 +66,56 @@ const Home = () => {
   }, [skip, name, actualPage]);
 
   const update = (page) => {
-    setSkip(page * 100 - 100); 
+    setSkip(page * 100 - 100);
     setactualPage(page);
-  }
+  };
 
   return isloading ? (
-   <Loader />
+    <Loader />
   ) : (
     <>
-      <div className="pagination flex flex-center mx-auto">
+      <div className="pagination flex flex-center mx-auto flex-wrap">
         {actualPage > 1 && (
-        <div
-          className="left-arrow"
-          onClick={() => {
-            setSkip(skip - limit);
-          }}
-        >
-          &#x1F818;
-        </div>
+          <div
+            className="left-arrow"
+            onClick={() => {
+              setSkip(skip - limit);
+            }}
+          >
+            &#x1F818;
+          </div>
         )}
         {/* creation d'un composant pour looper? */}
         {/* <div className="page">{numberOfPages}</div> */}
-      {actualPage }
+
         {paginateLoop(numberOfPages).map((page, index) => {
           return (
             <div
               key={index}
-              className= {actualPage === page ? "page isactive" : "page"}
-              onClick={(event) => {update(page)}}
+              className={actualPage === page ? "page isactive" : "page"}
+              onClick={(event) => {
+                update(page);
+              }}
             >
-        
               {page}
             </div>
           );
         })}
         {actualPage <= numberOfPages && (
-        <div
-          className="right-arrow"
-          onClick={() => {
-            setSkip(skip + limit);
-          }}
-        >
-          &#x1F81A;
-        </div>
-           )}
+          <div
+            className="right-arrow"
+            onClick={() => {
+              setSkip(skip + limit);
+            }}
+          >
+            &#x1F81A;
+          </div>
+        )}
       </div>
-     
 
-      <div className="search-container mx-auto mt-3">
+      {Cookies.get("favsChar")}
+
+      <div className="search-container m-auto mt-3">
         <input
           type="search"
           name=""
@@ -103,6 +123,7 @@ const Home = () => {
           placeholder="Rechercher un personnage"
           className="search br5"
           onChange={(event) => setName(event.target.value)}
+          autoComplete="on"
         />
       </div>
 
@@ -111,28 +132,37 @@ const Home = () => {
         {data.map((character, index) => {
           return (
             <>
-              <Link to={`/character/${character._id}`}>
+              <div
+                key={index}
+                className="card bg-black br10 hvr-underline-reveal bold"
+              >
                 <div
-                  key={index}
-                  className="card bg-black br10 hvr-underline-reveal bold"
+                  className="favorite flex flex-center fs3"
+                  onClick={() => addToFavourite(character._id, character.name)}
                 >
-                  <img
-                    src={
-                      character.thumbnail.path +
-                      "." +
-                      character.thumbnail.extension
-                    }
-                    alt=""
-                    className=""
-                  />
-                  <div className="flex flex-col flex-center gray p-2 fs-small center">
-                    <div className="red"> {character.name}</div>
-                    <div className=" mx-2">
-                      {character.description.slice(0, 60)} ...
-                    </div>
-                  </div>
+                  &#x2764;
                 </div>
-              </Link>
+
+                <img
+                  src={
+                    character.thumbnail.path +
+                    "." +
+                    character.thumbnail.extension
+                  }
+                  alt=""
+                  className=""
+                />
+
+                <div className="flex flex-col flex-center gray p-2 fs-small center">
+                  <div className="red"> {character.name}</div>
+                  <div className=" mx-2">
+                    {character.description.slice(0, 40)} ...
+                  </div>
+                  <Link to={`/character/${character._id}`}>
+                    <div className="btn mt-2">Voir</div>
+                  </Link>
+                </div>
+              </div>
             </>
           );
         })}
