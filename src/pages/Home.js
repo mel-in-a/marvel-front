@@ -168,7 +168,7 @@ const Home = () => {
                   <div className=" mx-2">
                     {character.description.slice(0, 40)} ...
                   </div>
-                  <Link to={`/character/${character._id}`}>
+                  <Link to={`/characters/${character._id}`}>
                     <div className="btn mt-2">Voir</div>
                   </Link>
                 </div>
