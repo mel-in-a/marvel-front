@@ -17,10 +17,12 @@ const Comics = () => {
     const getData = async () => {
       try {
         const req = await axios.get(
-          `https://lereacteur-marvel-api.herokuapp.com/comics/${id}?apiKey=K5Cv4yJRhfGFYne8`
+          `https://marvel-backend-melina.herokuapp.com/comics/${id}`
         );
         setData(req.data.comics);
         setisLoading(false);
+        // console.log(req.data.comics);
+        // console.log(typeof(req.data.comics));
         window.scrollTo(0, 0);
       } catch (error) {
         console.log(error);
@@ -33,17 +35,19 @@ const Comics = () => {
     <Loader />
   ) : (
     <>
-      <div className="container mt-3">
+      <div className="container mt-3 p-4">
         {" "}
         <h1 className="red fs3">Comics</h1>
       </div>
-      <div className="container red mt-4 fs3 bold">  {(data.comics === '') ? "Oooops ! pas de comics pour ce perso !"  : ''}</div>
+      <div className="container red mt-4 fs3 bold p-4">  {data.length === 0  ? "Pas de comics pour ce personnage !"  : ''}</div>
     
 
 
       <div className="gallery m-auto p-5">
         {data.map((comic, index) => {
           return (
+            <>
+     
             <div
               key={index}
               className="card br10 bold"
@@ -66,6 +70,7 @@ const Comics = () => {
               </div>
             </div>
             </div>
+            </>
           );
         })}
       </div>

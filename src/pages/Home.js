@@ -20,9 +20,7 @@ const Home = () => {
   useEffect(() => {
     if (Cookies.get("favsChar")) {
       setfavExists(true);
-     
     }
-   
   }, [favExists]);
 
   const paginateLoop = (numberOfPages) => {
@@ -32,6 +30,8 @@ const Home = () => {
     }
     return loop;
   };
+
+  
 
   const addToFavourite = (id) => {
     // i want to add an arrat to a cookie
@@ -50,7 +50,7 @@ const Home = () => {
     const getData = async () => {
       try {
         const req = await axios.get(
-          `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=K5Cv4yJRhfGFYne8&skip=${skip}&name=${name}`
+          `https://marvel-backend-melina.herokuapp.com/characters?skip=${skip}&name=${name}`
         );
         setData(req.data.results);
         setCount(req.data.count);
@@ -65,16 +65,24 @@ const Home = () => {
     getData();
   }, [skip, name, actualPage]);
 
+
+  // TODO oh qu'il est beau le tout doux !!!!
+
   const update = (page) => {
     setSkip(page * 100 - 100);
     setactualPage(page);
   };
 
+  // const skipMinus = () => {
+  //   setSkip(skip + limit);
+
+  // }
+
   return isloading ? (
     <Loader />
   ) : (
     <>
-      <div className="pagination flex flex-center mx-auto flex-wrap">
+      <div className="pagination flex flex-center mx-auto flex-wrap ">
         {actualPage > 1 && (
           <div
             className="left-arrow"
@@ -127,6 +135,8 @@ const Home = () => {
         />
       </div>
 
+
+            
       {/* end top pagination bloc */}
       <div className="gallery m-auto p-5">
         {data.map((character, index) => {
@@ -167,39 +177,43 @@ const Home = () => {
           );
         })}
       </div>
-      <div className="pagination flex flex-center mx-auto">
-        <div
-          className="left-arrow"
-          onClick={() => {
-            setSkip(skip - limit);
-          }}
-        >
-          &#x1F818;
-        </div>
-
+      <div className="pagination flex flex-center mx-auto flex-wrap ">
+        {actualPage > 1 && (
+          <div
+            className="left-arrow"
+            onClick={() => {
+              setSkip(skip - limit);
+            }}
+          >
+            &#x1F818;
+          </div>
+        )}
         {/* creation d'un composant pour looper? */}
         {/* <div className="page">{numberOfPages}</div> */}
-        {/* TODO // avoid click when no mores pages */}
+
         {paginateLoop(numberOfPages).map((page, index) => {
           return (
             <div
               key={index}
-              className="page"
-              onClick={() => setSkip(page * 100 - 100)}
+              className={actualPage === page ? "page isactive" : "page"}
+              onClick={(event) => {
+                update(page);
+              }}
             >
               {page}
             </div>
           );
         })}
-
-        <div
-          className="right-arrow"
-          onClick={() => {
-            setSkip(skip + limit);
-          }}
-        >
-          &#x1F81A;
-        </div>
+        {actualPage <= numberOfPages && (
+          <div
+            className="right-arrow"
+            onClick={() => {
+              setSkip(skip + limit);
+            }}
+          >
+            &#x1F81A;
+          </div>
+        )}
       </div>
     </>
   );

@@ -14,15 +14,15 @@ import Character from "./pages/Comics";
 function App() {
   return (
     <div>
-          <Router>
-      <Header />
+      <Router>
+        <Header />
 
         <Switch>
-          <Route exact path="/" >
-          <Home />
+          <Route exact path="/">
+            <Home />
           </Route>
-          <Route path="/character/:id" >
-          <Character  />
+          <Route path="/character/:id">
+            <Character />
           </Route>
         </Switch>
       </Router>
