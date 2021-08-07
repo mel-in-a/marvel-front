@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/character/:id">
+          <Route path="/characters/:id">
             <Character />
           </Route>
         </Switch>
