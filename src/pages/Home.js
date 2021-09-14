@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import Cookies from "js-cookie";
 
 const Home = () => {
+
+
+  const urlApi = process.env.API_URL_DEV;
+
+
   const [data, setData] = useState([]);
   const [isloading, setisLoading] = useState(true);
   const [skip, setSkip] = useState(0);
@@ -56,6 +61,7 @@ const Home = () => {
         setCount(req.data.count);
         setLimit(req.data.limit);
         setisLoading(false);
+        // console.log(req.data);
 
         // console.log("json data: " + req.data.results[1].name);
       } catch (error) {
@@ -168,7 +174,7 @@ const Home = () => {
                   <div className=" mx-2">
                     {character.description.slice(0, 40)} ...
                   </div>
-                  <Link to={`/characters/${character._id}`}>
+                  <Link to={`/comics/${character._id}`}>
                     <div className="btn mt-2">Voir</div>
                   </Link>
                 </div>
@@ -200,6 +206,7 @@ const Home = () => {
                 update(page);
               }}
             >
+
               {page}
             </div>
           );

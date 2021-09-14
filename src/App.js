@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import Character from "./pages/Comics";
+import Comics from "./pages/Comics";
 
 function App() {
   return (
@@ -21,8 +21,8 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/characters/:id">
-            <Character />
+          <Route path="/comics/:id">
+            <Comics />
           </Route>
         </Switch>
       </Router>
