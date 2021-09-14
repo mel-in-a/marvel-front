@@ -126,8 +126,8 @@ const Home = () => {
           </div>
         )}
       </div>
-
-      {Cookies.get("favsChar")}
+{/* 
+      {Cookies.get("favsChar")} */}
 
       <div className="search-container m-auto mt-3">
         <input

@@ -70,7 +70,7 @@ const Comics = () => {
                     <div className="flex flex-col flex-center gray p-2 fs-small center">
                       <div className="lh4 light mt-2 text-justify">
                         {comic.description
-                          ? comic.description
+                          ? comic.description.substring(0,455)
                           : "Pas description pour le moment"}
                       </div>
                     </div>
